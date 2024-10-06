@@ -12,6 +12,9 @@ function App() {
     const [data, setData] = useState(null);
     const [cartItems, setCartItems] = useState([]);
 
+    const [searchQuery, setSearchQuery] = useState('');
+
+
     const addToCart = (item) => {
         setCartItems((prevItems) => {
             const existingItem = prevItems.find(i => i.id === item.id);
@@ -39,10 +42,10 @@ function App() {
         <>
             <Header cartItems={cartItems} />
             <Routes>
-                <Route path='/' element={<Layout />}>
+                <Route path='/' element={<Layout searchQuery={searchQuery} setSearchQuery={setSearchQuery}  />}>
                     <Route index element={<FirstMain data={data} addToCart={addToCart} />} />
                     <Route path='/collections' element={<Collection data={data} addToCart={addToCart} />} />
-                    <Route path='/:category/:sub' element={<Main data={data} addToCart={addToCart} />} />
+                    <Route path='/:category/:sub' element={<Main searchQuery={searchQuery} setSearchQuery={setSearchQuery}  data={data} addToCart={addToCart} />} />
                     <Route path='/account' element={<Account />} />
                     <Route path='/cart' element={<Basket items={cartItems} setItems={updateCartItems} />} />
                 </Route>

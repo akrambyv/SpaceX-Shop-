@@ -5,16 +5,19 @@ import { IoMdClose } from 'react-icons/io';
 import { IoSearch } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 
-function Header() {
+function Header({ searchQuery, setSearchQuery }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [openCategory, setOpenCategory] = useState(null);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
-    const [searchQuery, setSearchQuery] = useState('');
     
 
     const handleCategoryClick = (category) => {
         setOpenCategory(openCategory === category ? null : category);
     };
+
+    useEffect(()=>{
+
+    }, [searchQuery])
 
     const handleMenuClose = () => {
         setIsMenuOpen(false);
