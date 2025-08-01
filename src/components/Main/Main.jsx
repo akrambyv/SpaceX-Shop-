@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 function Main({ data, addToCart, searchQuery, setSearchQuery }) {
     const { category, sub } = useParams();
     const [arr, setArr] = useState([]);
-    const [flag, setFlag] = useState(false)
+    const [flag, setFlag] = useState(false);
 
     useEffect(() => {
         if (data && data[category]) {

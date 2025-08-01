@@ -33,7 +33,7 @@ function App() {
     };
 
     useEffect(() => {
-        fetch("../data/data.json")
+        fetch("/data/data.json")
             .then(res => res.json())
             .then(item => setData(item.shop));
     }, []);
