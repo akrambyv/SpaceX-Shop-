@@ -10,22 +10,39 @@ function Main({ data, addToCart, searchQuery, setSearchQuery }) {
     useEffect(() => {
         if (data && data[category]) {
             setArr(data[category]);
-            setFlag(true)
+            setFlag(true);
         }
-    }, [data, category])
+    }, [data, category]);
+
+    let displayItems = [];
+
+    if (flag) {
+        if (Array.isArray(arr)) {
+            displayItems = arr; // viewall array
+        } else if (arr && arr[sub]) {
+            displayItems = arr[sub]; // normal sub
+        } else {
+            displayItems = [];
+        }
+    }
 
     return (
         <main className='min-h-[90vh] pt-[150px]'>
             <p className='text-[30px] text-center uppercase pb-5'>{category}'s things</p>
             <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-12 py-5'>
                 {
-                    flag && (
-                        arr[sub]
-                            .filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()))
-                            .map((item, i) => {
-                                return (<Card searchQuery={searchQuery} setSearchQuery={setSearchQuery} {...item} addToCart={addToCart} category={category} key={i} />)
-                            })
-                    )
+                    flag && displayItems
+                        .filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()))
+                        .map((item, i) => (
+                            <Card
+                                searchQuery={searchQuery}
+                                setSearchQuery={setSearchQuery}
+                                {...item}
+                                addToCart={addToCart}
+                                category={category}
+                                key={i}
+                            />
+                        ))
                 }
             </div>
         </main>
